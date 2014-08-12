@@ -22,7 +22,7 @@ You can also add to your vimrc file autocommand:
 
     autocmd BufRead *.asm set filetype=kickass
 
-From now on, all files with extension 'asm' will have brand new kickass
+From now on, all files with extension *asm* will have brand new kickass
 syntax.
 
 Enjoy.
@@ -32,4 +32,4 @@ Enjoy.
 .. _Vundle: https://github.com/gmarik/Vundle.vim
 .. _NeoBundle: https://github.com/Shougo/neobundle.vim
 .. _BitBucket: https://bitbucket.org/gryf/kickass-syntax-vim
-.. _GitHub: https://bitbucket.org/gryf/kickass-syntax-vim
+.. _GitHub: https://github.com/gryf/kickass-syntax-vim

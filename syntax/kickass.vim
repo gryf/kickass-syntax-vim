@@ -1,10 +1,12 @@
 " Vim syntax file
 " Language:     Assembler, KickAssembler
 " Maintainer:   Roman 'gryf' Dobosz <gryf_esm@o2.pl>
-" Last Change:  2012-07-22
-" Version:      1.2
+" Last Change:  2014-08-12
+" Version:      1.3
 "
 " Changelog:
+"   1.3 Updated to KickAssembler 3.36 changes (added addAll and uget* methods)
+"
 "   1.2 Updated to KickAssembler 3.25 changes
 "
 "   1.1 Since in assembly languages 'everything is a label' there pretty hard
@@ -240,6 +242,7 @@ syn match kickAssMethod "\.\<remove\>("he=e-1,hs=s+1
 syn match kickAssMethod "\.\<shuffle\>("he=e-1,hs=s+1
 syn match kickAssMethod "\.\<reverse\>("he=e-1,hs=s+1
 syn match kickAssMethod "\.\<sort\>("he=e-1,hs=s+1
+syn match kickAssMethod "\.\<addAll\>("he=e-1,hs=s+1
 " READY.
 
 " Hash - already defined names: get, remove
@@ -292,6 +295,8 @@ syn keyword kickAssConstant BD_C64FILE BF_BITMAP_SINGLECOLOR BF_KOALA BF_FLI
 syn match kickAssFunction "\<LoadBinary\>("he=e-1
 syn match kickAssMethod "\.\<getSize\>("he=e-1,hs=s+1
 syn match kickAssFunction "\<LoadBinary\>("he=e-1
+syn match kickAssMethod "\.\<uget[a-zA-Z0-9]*\>("he=e-1,hs=s+1
+
 
 " Graphics files
 syn match kickAssFunction "\<LoadPicture\>("he=e-1
