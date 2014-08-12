@@ -1,12 +1,14 @@
 " Vim syntax file
 " Language:     Assembler, KickAssembler
 " Maintainer:   Roman 'gryf' Dobosz <gryf_esm@o2.pl>
-" Last Change:  2012-07-09
-" Version:      1.1
+" Last Change:  2012-07-22
+" Version:      1.2
 "
 " Changelog:
-"   1.1 Since in assembly languages 'everything is a label' there pretty hard 
-"   to distinguish labels from variables and structures, so I decided to 
+"   1.2 Updated to KickAssembler 3.25 changes
+"
+"   1.1 Since in assembly languages 'everything is a label' there pretty hard
+"   to distinguish labels from variables and structures, so I decided to
 "   remove highlighting labels at all. Instead numbers are highlighted, so that
 "   labels and defined variables are easily spotted in the code.
 "
@@ -34,68 +36,66 @@ syn match kickAssMacroCall  ":[a-z_][a-z0-9_]*"
 syn case match
 
 " 6502 mnemonics
-syn keyword kickAssMnemonic brk clc cld cli clv dex dey nextgroup=kickAssLabels
-syn keyword kickAssMnemonic inx iny nop pha php pla plp nextgroup=kickAssLabels
-syn keyword kickAssMnemonic sec sed sei tax tay tsx txa nextgroup=kickAssLabels
-syn keyword kickAssMnemonic txs tya nextgroup=kickAssLabels
-syn keyword kickAssJump rti rts nextgroup=kickAssLabels
+syn keyword kickAssMnemonic brk clc cld cli clv dex dey inx iny nop pha php
+syn keyword kickAssMnemonic pla plp sec sed sei tax tay tsx txa txs tya
+syn keyword kickAssJump rti rts
 
-syn match kickAssMnemonic "\<adc\(\.\(imm\?\|zp\?x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<ahx\(\.\(izp\?y\|a\(bs\)\?y\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<alr\(\.imm\?\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<anc\(\.imm\?\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<anc2\(\.imm\?\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<and\(\.\(imm\?\|zp\?x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<arr\(\.imm\?\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<asl\(\.\(zp\?x\?\|a\(bs\)\?x\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<axs\(\.imm\?\)\?\>" nextgroup=kickAssLabels
-syn match kickAssJump "\<bcc\(\.r\(el\)\?\)\?\>" nextgroup=kickAssLabels
-syn match kickAssJump "\<bcs\(\.r\(el\)\?\)\?\>" nextgroup=kickAssLabels
-syn match kickAssJump "\<beq\(\.r\(el\)\?\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<bit\(\.\(zp\?x\?\|a\(bs\)\?x\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssJump "\<bmi\(\.r\(el\)\?\)\?\>" nextgroup=kickAssLabels
-syn match kickAssJump "\<bne\(\.r\(el\)\?\)\?\>" nextgroup=kickAssLabels
-syn match kickAssJump "\<bpl\(\.r\(el\)\?\)\?\>" nextgroup=kickAssLabels
-syn match kickAssJump "\<bvc\(\.r\(el\)\?\)\?\>" nextgroup=kickAssLabels
-syn match kickAssJump "\<bvs\(\.r\(el\)\?\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<cmp\(\.\(imm\?\|zp\?x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<cpx\(\.\(imm\?\|zp\?\|a\(bs\)\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<cpy\(\.\(imm\?\|zp\?\|a\(bs\)\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<dcp\(\.\(zp\?\x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<dec\(\.\(zp\?x\?\|a\(bs\)\?x\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<eor\(\.\(imm\?\|zp\?x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<inc\(\.\(zp\?x\?\|a\(bs\)\?x\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<isc\(\.\(zp\?\x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssJump "\<jmp\(\.\(a\(bs\)\?\|i\(nd\)\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssJump "\<jsr\(\.a\(bs\)\?\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<las\(\.a\(bs\)\?y\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<lax\(\.\(imm\?\|zp\?y\?\|izp\?[xy]\|a\(bs\)\?y\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<lda\(\.\(imm\?\|zp\?x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<ldx\(\.\(imm\?\|zp\?y\?\|a\(bs\)\?y\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<ldy\(\.\(imm\?\|zp\?x\?\|a\(bs\)\?x\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<lsr\(\.\(zp\?x\?\|a\(bs\)\?x\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<ora\(\.\(imm\?\|zp\?x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<rla\(\.\(zp\?\x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<rol\(\.\(zp\?x\?\|a\(bs\)\?x\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<ror\(\.\(zp\?x\?\|a\(bs\)\?x\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<rra\(\.\(zp\?\x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<sax\(\.\(zp\?[xy]\?\|a\(bs\)\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<sbc\(\.\(imm\?\|zp\?x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<sbc2\(\.imm\?\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<shx\(\.a\(bs\)\?y\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<shy\(\.a\(bs\)\?x\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<slo\(\.\(zp\?\x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<sre\(\.\(zp\?\x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<sta\(\.\(zp\?\x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<stx\(\.\(zp\?y\?\|a\(bs\)\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<sty\(\.\(zp\?x\?\|a\(bs\)\?\)\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<tas\(\.a\(bs\)\?y\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<xaa\(\.imm\?\)\?\>" nextgroup=kickAssLabels
+syn match kickAssMnemonic "\<adc\(\.\(imm\?\|zp\?x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>"
+syn match kickAssMnemonic "\<ahx\(\.\(izp\?y\|a\(bs\)\?y\)\)\?\>"
+syn match kickAssMnemonic "\<alr\(\.imm\?\)\?\>"
+syn match kickAssMnemonic "\<anc\(\.imm\?\)\?\>"
+syn match kickAssMnemonic "\<anc2\(\.imm\?\)\?\>"
+syn match kickAssMnemonic "\<and\(\.\(imm\?\|zp\?x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>"
+syn match kickAssMnemonic "\<arr\(\.imm\?\)\?\>"
+syn match kickAssMnemonic "\<asl\(\.\(zp\?x\?\|a\(bs\)\?x\?\)\)\?\>"
+syn match kickAssMnemonic "\<axs\(\.imm\?\)\?\>"
+syn match kickAssJump "\<bcc\(\.r\(el\)\?\)\?\>"
+syn match kickAssJump "\<bcs\(\.r\(el\)\?\)\?\>"
+syn match kickAssJump "\<beq\(\.r\(el\)\?\)\?\>"
+syn match kickAssMnemonic "\<bit\(\.\(zp\?\|a\(bs\)\?\)\)\?\>"
+syn match kickAssJump "\<bmi\(\.r\(el\)\?\)\?\>"
+syn match kickAssJump "\<bne\(\.r\(el\)\?\)\?\>"
+syn match kickAssJump "\<bpl\(\.r\(el\)\?\)\?\>"
+syn match kickAssJump "\<bvc\(\.r\(el\)\?\)\?\>"
+syn match kickAssJump "\<bvs\(\.r\(el\)\?\)\?\>"
+syn match kickAssMnemonic "\<cmp\(\.\(imm\?\|zp\?x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>"
+syn match kickAssMnemonic "\<cpx\(\.\(imm\?\|zp\?\|a\(bs\)\?\)\)\?\>"
+syn match kickAssMnemonic "\<cpy\(\.\(imm\?\|zp\?\|a\(bs\)\?\)\)\?\>"
+syn match kickAssMnemonic "\<dcp\(\.\(zp\?\x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>"
+syn match kickAssMnemonic "\<dec\(\.\(zp\?x\?\|a\(bs\)\?x\?\)\)\?\>"
+syn match kickAssMnemonic "\<eor\(\.\(imm\?\|zp\?x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>"
+syn match kickAssMnemonic "\<inc\(\.\(zp\?x\?\|a\(bs\)\?x\?\)\)\?\>"
+syn match kickAssMnemonic "\<isc\(\.\(zp\?\x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>"
+syn match kickAssJump "\<jmp\(\.\(a\(bs\)\?\|i\(nd\)\?\)\)\?\>"
+syn match kickAssJump "\<jsr\(\.a\(bs\)\?\)\?\>"
+syn match kickAssMnemonic "\<las\(\.a\(bs\)\?y\)\?\>"
+syn match kickAssMnemonic "\<lax\(\.\(imm\?\|zp\?y\?\|izp\?[xy]\|a\(bs\)\?y\?\)\)\?\>"
+syn match kickAssMnemonic "\<lda\(\.\(imm\?\|zp\?x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>"
+syn match kickAssMnemonic "\<ldx\(\.\(imm\?\|zp\?y\?\|a\(bs\)\?y\?\)\)\?\>"
+syn match kickAssMnemonic "\<ldy\(\.\(imm\?\|zp\?x\?\|a\(bs\)\?x\?\)\)\?\>"
+syn match kickAssMnemonic "\<lsr\(\.\(zp\?x\?\|a\(bs\)\?x\?\)\)\?\>"
+syn match kickAssMnemonic "\<ora\(\.\(imm\?\|zp\?x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>"
+syn match kickAssMnemonic "\<rla\(\.\(zp\?\x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>"
+syn match kickAssMnemonic "\<rol\(\.\(zp\?x\?\|a\(bs\)\?x\?\)\)\?\>"
+syn match kickAssMnemonic "\<ror\(\.\(zp\?x\?\|a\(bs\)\?x\?\)\)\?\>"
+syn match kickAssMnemonic "\<rra\(\.\(zp\?\x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>"
+syn match kickAssMnemonic "\<sax\(\.\(zp\?[xy]\?\|a\(bs\)\?\)\)\?\>"
+syn match kickAssMnemonic "\<sbc\(\.\(imm\?\|zp\?x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>"
+syn match kickAssMnemonic "\<sbc2\(\.imm\?\)\?\>"
+syn match kickAssMnemonic "\<shx\(\.a\(bs\)\?y\)\?\>"
+syn match kickAssMnemonic "\<shy\(\.a\(bs\)\?x\)\?\>"
+syn match kickAssMnemonic "\<slo\(\.\(zp\?\x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>"
+syn match kickAssMnemonic "\<sre\(\.\(zp\?\x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>"
+syn match kickAssMnemonic "\<sta\(\.\(zp\?\x\?\|izp\?[xy]\|a\(bs\)\?[xy]\?\)\)\?\>"
+syn match kickAssMnemonic "\<stx\(\.\(zp\?y\?\|a\(bs\)\?\)\)\?\>"
+syn match kickAssMnemonic "\<sty\(\.\(zp\?x\?\|a\(bs\)\?\)\)\?\>"
+syn match kickAssMnemonic "\<tas\(\.a\(bs\)\?y\)\?\>"
+syn match kickAssMnemonic "\<xaa\(\.imm\?\)\?\>"
 
 " DTV mnemonics
-syn match kickAssJump "\<bra\(\.r\(el\)\?\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<sac\(\.imm\?\)\?\>" nextgroup=kickAssLabels
-syn match kickAssMnemonic "\<sir\(\.imm\?\)\?\>" nextgroup=kickAssLabels
+syn match kickAssJump "\<bra\(\.r\(el\)\?\)\?\>"
+syn match kickAssMnemonic "\<sac\(\.imm\?\)\?\>"
+syn match kickAssMnemonic "\<sir\(\.imm\?\)\?\>"
 
 " indexes
 syn match kickAssIndex ",\s*[xy]"
@@ -129,6 +129,10 @@ syn match kickAssDirective /\.\<dword\>/
 syn match kickAssDirective /\.\<text\>/
 syn match kickAssDirective /\.\<fill\>/
 syn match kickAssDirective /\.\<pseudopc\>/
+
+" modifiers
+syn match kickAssDirective /\.\<modify\>/
+syn match kickAssDirective /\.\<filemodify\>/
 
 " import directive
 syn match kickAssDirective "\.\<importonce\>"
