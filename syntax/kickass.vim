@@ -2,9 +2,12 @@
 " Language:     Assembler, KickAssembler
 " Maintainer:   Roman 'gryf' Dobosz <gryf_esm@o2.pl>
 " Last Change:  2019-08-04
-" Version:      1.4
+" Version:      1.5
 "
 " Changelog:
+"   1.5 Updated to KickAssembler 4.19. Added *, .zp, .encoding, .errorif and 
+"   .while directives. Added new import and preprocessor commands.
+"
 "   1.4 Updated to KickAssembler 3.42 changes. Added abbreviations for .byte, 
 "   .word and .dword. Added getPath and getFilename kickass functions.
 "
@@ -137,6 +140,9 @@ syn match kickAssDirective /\.\<dw\>/
 syn match kickAssDirective /\.\<text\>/
 syn match kickAssDirective /\.\<fill\>/
 syn match kickAssDirective /\.\<pseudopc\>/
+syn match kickAssDirective /\.\<zp\>/
+syn match kickAssDirective /^\*[^\*]/he=e-1
+syn match kickAssDirective /\.\<encoding\>/
 
 " modifiers
 syn match kickAssDirective /\.\<modify\>/
@@ -146,6 +152,17 @@ syn match kickAssDirective /\.\<filemodify\>/
 syn match kickAssDirective "\.\<importonce\>"
 syn match kickAssDirective "\.\<import\>" nextgroup=kickAssImportType skipwhite
 syn keyword kickAssImportType source binary c64 text contained
+
+" preprocessor/imports
+syn match kickAssInclude /#importonce\>/
+syn match kickAssInclude /#importif\>/
+syn match kickAssInclude /#import\>/
+syn match kickAssPreProc /#define\>/
+syn match kickAssPreProc /#undef\>/
+syn match kickAssPreProc /#if\>/
+syn match kickAssPreProc /#elif\>/
+syn match kickAssPreProc /#else\>/
+syn match kickAssPreProc /#endif\>/
 
 " console output
 syn match kickAssDirective "\.\<print\>"
@@ -162,12 +179,16 @@ syn match kickAssDirective "\.\<lock\>"
 syn match kickAssDirective "\.\<define\>"
 syn match kickAssDirective "\.\<if\>"
 syn keyword kickAssDirective else
-syn match kickAssDirective "\.\<for\>"
+syn keyword kickAssDirective if
+syn keyword kickAssDirective var
+syn match kickAssDirective "\.\<for\>("he=e-1,hs=s+1
 syn match kickAssDirective "\.\<macro\>"
 syn match kickAssDirective "\.\<function\>"
 syn match kickAssDirective "\.\<return\>"
 syn match kickAssDirective "\.\<namespace\>"
 syn match kickAssDirective "\.\<filenamespace\>"
+syn match kickAssDirective "\.\<errorif\>"
+syn match kickAssDirective "\.\<while\>("he=e-1,hs=s+1
 
 " special macros
 syn match kickAssMacroCall ":\<BasicUpstart2\?\>"
@@ -198,6 +219,8 @@ syn match kickAssMethod "\.\<charAt\>("he=e-1,hs=s+1
 syn match kickAssMethod "\.\<substring\>("he=e-1,hs=s+1
 syn match kickAssMethod "\.\<asBoolean\>("he=e-1,hs=s+1
 syn match kickAssMethod "\.\<asNumber\>("he=e-1,hs=s+1
+syn match kickAssMethod "\.\<toLowerCase\>("he=e-1,hs=s+1
+syn match kickAssMethod "\.\<toUpperCase\>("he=e-1,hs=s+1
 
 syn match kickAssFunction "\<toIntString\>("he=e-1
 syn match kickAssFunction "\<toBinaryString\>("he=e-1
@@ -347,6 +370,8 @@ if !exists("did_kickasm_syntax_inits")
     hi def link kickAssTodo Todo
 
     hi def link kickAssImportType Operator
+    hi def link kickAssInclude Include
+    hi def link kickAssPreProc PreProc
 
     hi def link kickAssFunction Function
     hi def link kickAssMethod Function
