@@ -1,10 +1,13 @@
 " Vim syntax file
 " Language:     Assembler, KickAssembler
 " Maintainer:   Roman 'gryf' Dobosz <gryf_esm@o2.pl>
-" Last Change:  2014-08-12
-" Version:      1.3
+" Last Change:  2019-08-04
+" Version:      1.4
 "
 " Changelog:
+"   1.4 Updated to KickAssembler 3.42 changes. Added abbreviations for .byte, 
+"   .word and .dword. Added getPath and getFilename kickass functions.
+"
 "   1.3 Updated to KickAssembler 3.36 changes (added addAll and uget* methods)
 "
 "   1.2 Updated to KickAssembler 3.25 changes
@@ -126,8 +129,11 @@ syn match kickAssImmediate "#>\d\+\>"
 syn match kickAssDirective /\.\<pc\>/
 syn match kickAssDirective /\.\<align\>/
 syn match kickAssDirective /\.\<byte\>/
+syn match kickAssDirective /\.\<by\>/
 syn match kickAssDirective /\.\<word\>/
+syn match kickAssDirective /\.\<wo\>/
 syn match kickAssDirective /\.\<dword\>/
+syn match kickAssDirective /\.\<dw\>/
 syn match kickAssDirective /\.\<text\>/
 syn match kickAssDirective /\.\<fill\>/
 syn match kickAssDirective /\.\<pseudopc\>/
@@ -321,6 +327,10 @@ syn match kickAssMethod "\.\<writeln\>("he=e-1,hs=s+1
 syn match kickAssDirective "\.\<kickAssert\>"
 syn match kickAssDirective "\.\<kickAsserterror\>"
 
+" Misc
+syn match kickAssMethod "\<getPath\>("he=e-1,hs=s+1
+syn match kickAssMethod "\<getFilename\>("he=e-1,hs=s+1
+
 if !exists("did_kickasm_syntax_inits")
   let did_kickasm_syntax_inits = 1
 
@@ -350,4 +360,4 @@ if !exists("did_kickasm_syntax_inits")
     hi def link kickAssDecNumber Number
 endif
 
-let b:current_syntax = "kickasm"
+let b:current_syntax = "kickass"
